@@ -1,0 +1,333 @@
+MODEL Parcer
+CLASS ParseurView
+ATTRIBUTES
+OPERATIONS
+      start(stage : PrimaryStage) : void,
+      main(args : String[]) : void
+;
+
+CLASS ParseurController
+ATTRIBUTES
+      listClass : ListView<UMLClass>,
+      listAttributes : ListView<UMLAttributes>,
+      listMethodes : <UMLMethode>,
+      listSousClass : ListView<UMLClass>,
+      listAssoAgrega : ListView<UMLAssoAggrega>,
+      listMetrics : ListView<Metrics>,
+      fileName : TextField,
+      details : TextArea,
+      arayClass : ArrayList<UMLClass>,
+      Metrics : ArrayList<CalcMetrics>,
+      fileLoaded : boolean,
+      metricsDone : boolean,
+      csvDone : boolean,
+      classActive : UMLClass,
+      fileLoadedName : String,
+      csv : CSV
+OPERATIONS
+      initialize(location : URL, resources : ReseourceBundle) : void,
+      displayClassInfos(newClass : UMLClass) : void,
+      clearSelection(code : Integer, code2 : Integer, code3 : Integer) : void,
+      clearList() : void,
+      onClick() : void,
+      calculMetric() : void,
+      generateCSV() : void,
+      loadAndParce() : void,
+      errorPopup(typeError : String, message : String) : void
+;
+
+CLASS Parcer
+ATTRIBUTES
+      arrayClass : ArrayList<UMLClass>,
+      validParse : boolean,
+      details : String,
+      errorMsg : String,
+      errorDetails : String
+OPERATIONS
+      getErrorMsg() : String,
+      getErrorDetails() : String,
+      isValidParse() : boolean,
+      parceFile(fileName : String) : void,
+      checkDeclaration(toParse : String) : void,
+      parseClass(toParse : String) : void,
+      parseGeneralization(toParse : String) : void,
+      parseRelation(toParse : String) : void,
+      parseAggregation(toParse : String) : void,
+      getClassFromName(name : String) : UMLClass,
+      getClassName(stringClass : String) : String,
+      getArrayClass() : ArrayList<UMLClass>,
+      validClassExists(newClass : String) : boolean,
+      validExtension(fileName : String) : boolean,
+      validClassInheritance(umlClass : UMLClass),
+      resetMark() : void,
+      validArrayInheritance() : void
+;
+
+CLASS UMLComponent
+ATTRIBUTES
+      details : String
+OPERATIONS
+      getDetails() : String
+;
+
+CLASS UMLClass
+ATTRIBUTES
+      attributes : ArrayList<UMLAttributes>,
+      operations : ArrayList<UMLMethode>,
+      subClasses : ArrayList<UMLClass>,
+      aggregates : ArrayList<UMLAggregates>,
+      relation : ArrayList<UMLRelation>,
+      name : String,
+      detailsGen : String,
+      parent : UMLClass,
+      mark : boolean
+OPERATIONS
+	UMLClass(name : String, attributes : ArrayList<UMLAttributes>, methods : ArrayList<UMLMethode>, details : String),
+      UMLClass(toParse : String, details : String),
+      parceAttributes(tmpAtt : String) : void,
+      parceOperations(tmpOp : String) : void,
+      getListOperations(operations : ArrayList<String>) : ArrayList<UMLMethode>,
+      addSubClass(newSubClass : UMLClass) : void,
+      addAggregates(aggregates : UMLAggregates) : void,
+      addRelation(relation : UMLRelation) : void,
+      toString() : String
+;
+
+CLASS UMLAggregate
+ATTRIBUTES
+OPERATIONS
+      UMLAggregate(relation : String, details : String),
+      toString() : String
+;
+
+CLASS UMLAssoAggrega
+ATTRIBUTES
+      name : String,
+      details : String
+OPERATIONS
+      getDetails() : String
+;
+
+CLASS UMLAttributes
+ATTRIBUTES
+      attribute : String,
+      type : String,
+      name : String
+OPERATIONS
+      UMLAttributes(attribute : String, details : String),
+      toString() : String,
+      getType() : String,
+      setType(type : String) : void
+;
+
+CLASS UMLMethode
+ATTRIBUTES
+      operation : String,
+      arguments : ArrayList<UMLAttributes>,
+      output : String,
+      name : String
+OPERATIONS
+      UMLMethode(operation : String, details : String),
+      getArguments() : ArrayList<UMLAttributes>,
+      getOutput() : String,
+      getName() : String,
+      parceOutput() : void,
+      parceName() : void,
+      parceArguments() : void,
+      getOperation() : String,
+      toString() : String
+;
+
+CLASS UMLRelation
+ATTRIBUTES
+OPERATIONS
+      UMLRelation(relation : String, details : String),
+      toString() : String
+;
+
+CLASS CalcMetrics
+ATTRIBUTES
+      umlClass : UMLClass,
+      Metrics : ArrayList<Metrics>,
+      modelClass : ArrayList<UMLClass>
+OPERATIONS
+      CalcMetrics(umlClass : UMLClass, modelClass : ArrayList<UMLClass>),
+      CalcMetrics(),
+      getUmlClass() : UMLClass,
+      setUMLClass(umlClass : UMLClass) : void,
+      getMetrics() : ArrayList<Metrics>,
+      calculerMetrique() : void,
+      calcANA(umlClass : UMLClass) : Float,
+      getUniqueMethods(umlClass : UMLClass, prevArrayMethod : ArrayList<UMLMethode>) : ArrayList<UMLMethode>,
+      calcNOM(umlClass : UMLClass) : Integer,
+      calcAttributes(umlClass : UMLClass) : Integer,
+      calcNOA(umlClass : UMLClass) : Integer,
+      calcFreqClassAsArgsType(umlClass : UMLClass, method : UMLMethode) : Integer,
+      calcITC(umlClass : UMLClass, modelClass : ArrayList<UMLClass>) : Integer,
+      calcETC(umlClass : UMLClass, modelClass : ArrayList<UMLClass>) : Integer,
+      calcCAC(umlClass : UMLClass) : Integer,
+      calcDIT(umlClass : UMLClass) : Integer,
+      getLeafs(umlClass : UMLClass) : ArrayList<UMLClass>,
+      calcCLD(umlClass : UMLClass) : Integer,
+      calcNOC(umlClass : UMLClass) : Integer,
+      calcNOD(umlClass : UMLClass) : Integer,
+;
+
+CLASS Metrics
+ATTRIBUTES
+      name : String,
+      value : Integer,
+      valueF : Float,
+      definition : String
+OPERATIONS
+	Metrics(name : String, value : Integer),
+	Metrics(name : String, valueF : Float),
+      getValue() : Integer,
+      getValueF() : Float,
+      getDefinition() : String,
+      getName() : String,
+      toString() : String,
+      setDef() : void
+;
+
+CLASS CSV
+ATTRIBUTES
+      Metrics : ArrayList<CalcMetrics>,
+      COMMA_DELIMITER : String,
+      NEW_LINE_SEPARATOR : String,
+      FILE_HEADER : String,
+      fileName : String
+OPERATIONS
+      CSV(Metrics : ArrayList<CalcMetrics>, fileName : String),
+      writeCsvFile(fileName : String) : void
+;
+
+GENERALIZATION UMLComponent
+      SUBCLASSES UMLAttributes, UMLClass, UMLMethode
+;
+
+GENERALIZATION UMLAssoAggrega
+      SUBCLASSES UMLAggregate, UMLRelation
+;
+
+RELATION calcul 
+       ROLES
+       CLASS CalcMetrics ONE,
+       CLASS Metrics ONE_OR_MANY
+;
+
+RELATION utilise 
+       ROLES
+       CLASS CSV ONE,
+       CLASS Metrics ONE_OR_MANY
+;
+
+RELATION controlle 
+       ROLES
+       CLASS ParseurController ONE,
+       CLASS ParseurView ONE
+;
+
+RELATION genere 
+       ROLES
+       CLASS ParseurController ONE,
+       CLASS CSV ONE
+;
+
+RELATION parent 
+       ROLES
+       CLASS UMLClass ONE,
+       CLASS UMLClass ONE_OR_MANY
+;
+
+AGGREGATION
+CONTAINER
+      CLASS CSV ONE
+PARTS
+      CLASS CalcMetrics ONE_OR_MANY
+;
+
+AGGREGATION
+CONTAINER
+      CLASS ParseurController ONE
+PARTS
+      CLASS CalcMetrics ONE_OR_MANY
+;
+
+AGGREGATION
+CONTAINER
+      CLASS ParseurController ONE
+PARTS
+      CLASS UMLClass ONE_OR_MANY
+;
+
+AGGREGATION
+CONTAINER
+      CLASS ParseurController ONE
+PARTS
+      CLASS UMLClass ONE
+;
+
+AGGREGATION
+CONTAINER
+      CLASS CalcMetrics ONE
+PARTS
+      CLASS UMLClass ONE_OR_MANY
+;
+
+AGGREGATION
+CONTAINER
+      CLASS CalcMetrics ONE
+PARTS
+      CLASS UMLClass ONE
+;
+
+AGGREGATION
+CONTAINER
+      CLASS UMLClass ONE
+PARTS
+      CLASS UMLAttributes ONE_OR_MANY
+;
+
+AGGREGATION
+CONTAINER
+      CLASS UMLClass ONE
+PARTS
+      CLASS UMLMethode ONE_OR_MANY
+;
+
+AGGREGATION
+CONTAINER
+      CLASS UMLClass ONE
+PARTS
+      CLASS UMLAggregate ONE_OR_MANY
+;
+
+AGGREGATION
+CONTAINER
+      CLASS UMLClass ONE
+PARTS
+      CLASS UMLRelation ONE_OR_MANY
+;
+
+AGGREGATION
+CONTAINER
+      CLASS Parcer ONE
+PARTS
+      CLASS UMLClass ONE_OR_MANY
+;
+
+AGGREGATION
+CONTAINER
+      CLASS Parcer ONE
+PARTS
+      CLASS UMLClass ONE_OR_MANY
+;
+
+
+
+
+
+
+
+
