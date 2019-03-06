@@ -1,0 +1,28 @@
+Joueurs ayant la même date de naissance (Jour/Mois)
+n = 24 
+n = 0 
+n = 24 
+n = 24 
+n = 24 
+n = 24 
+n = 24 
+n = 24 
+n = 24 
+n = 24 
+n = 24 
+Noel Acciari (Mois : MAY Jour : 1) et David Backes (Mois : MAY Jour : 1) 
+n = 24 
+Noel Acciari (Mois : MAY Jour : 1) et David Backes (Mois : MAY Jour : 1) 
+David Backes (Mois : MAY Jour : 1) et Patrice Bergeron (Mois : MAY Jour : 1) 
+Résultats 
+Noel Acciari (Mois : MAY Jour : 1) et David Backes (Mois : MAY Jour : 1) 
+David Backes (Mois : MAY Jour : 1) et Patrice Bergeron (Mois : MAY Jour : 1) 
+n = 24n2 = 2 
+Résultats 
+Noel Acciari (Mois : MAY Jour : 1) et David Backes (Mois : MAY Jour : 1) 
+David Backes (Mois : MAY Jour : 1) et Patrice Bergeron (Mois : MAY Jour : 1) 
+n = 24 n2 = 2 
+Résultats 
+Noel Acciari (Mois : MAY Jour : 1) et David Backes (Mois : MAY Jour : 1) 
+David Backes (Mois : MAY Jour : 1) et Patrice Bergeron (Mois : MAY Jour : 1) 
+n = 24 n2 = 2 
